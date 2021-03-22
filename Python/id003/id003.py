@@ -74,7 +74,6 @@ def solve_problem3(num: int):
     if factors:
         return max(factors)
     return None
-    
 
 
 if __name__ == "__main__":

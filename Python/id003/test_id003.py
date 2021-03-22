@@ -41,14 +41,17 @@ def test_factorise_numbers():
     assert factorise(60) == {2: 2, 3: 1, 5: 1}
 
 
+# Hacker Rank results added
 def test_problem3():
     """Prime factors of numbers from the task"""
-    assert sp3(0) is None 
+    assert sp3(0) is None
     assert sp3(1) is None
     assert sp3(2) == 2
     assert sp3(4) == 2
     assert sp3(6) == 3
     assert sp3(7) == 7
+    assert sp3(10) == 5
+    assert sp3(17) == 17
     assert sp3(121) == 11
     assert sp3(13195) == 29
     assert sp3(600851475143) == 6857
