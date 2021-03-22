@@ -10,7 +10,8 @@ import pytest
 
 from id002 import Fibonacci as Fib
 from id002 import (solve_problem2 as sp2,
-                   solve_problem2_v2 as sp22)
+                   solve_problem2_v2 as sp22,
+                   solve_problem2_v3 as sp23)
 
 
 def test_fib1():
@@ -50,5 +51,8 @@ def test_ten_fibs_from_one_and_two():
 
 def test_problem2_solution():
     """Problem 2 solution."""
-    assert sp2() == 4613732
-    assert sp22() == 4613732
+    tdata = {10: 10, 100: 44, 4e6: 4613732}
+    for num, res in tdata.items():
+        assert sp2(num) == res
+        assert sp22(num) == res
+        assert sp23(num) == res

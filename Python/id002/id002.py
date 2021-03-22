@@ -28,7 +28,7 @@ class Fibonacci:
         return current
 
 
-def solve_problem2():
+def solve_problem2(uplimit: int):
     """
     Each new term in the Fibonacci sequence is generated
     by adding the previous two terms. By starting with 1 and 2,
@@ -42,7 +42,9 @@ def solve_problem2():
     """
     fibiter = Fibonacci(1)
     next(fibiter)  # get rid of the first 1
-    return sum(fib for fib in takewhile(lambda x: (x <= 4e6), fibiter) if not fib % 2)
+    return sum(
+        fib for fib in takewhile(lambda x: (x <= uplimit), fibiter) if not fib % 2
+    )
 
 
 # 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
@@ -53,7 +55,8 @@ def solve_problem2():
 # then current odd and previous even -> still odd
 # but on the next third value + odd to the already odd current -> even
 
-def solve_problem2_v2():
+
+def solve_problem2_v2(uplimit: int):
     """
     Each new term in the Fibonacci sequence is generated
     by adding the previous two terms. By starting with 1 and 2,
@@ -65,22 +68,27 @@ def solve_problem2_v2():
     whose values do not exceed four million,
     find the sum of the even-valued terms.
     """
-    uplimit = 4e6
     fibiter = Fibonacci(1)
-    keep_on = True
     fibsum = 0
-    while keep_on:
-        for _ in 0, 1:
-            fibel = next(fibiter)
-            if fibel > uplimit:
-                keep_on = False
-                break
-            fibsum += fibel
-        else:
-            next(fibiter)  # even !
+    while True:
+        for _ in range(2):
+            next(fibiter)
+        fibel = next(fibiter)  # even
+        if fibel > uplimit:
+            break
+        fibsum += fibel
     return fibsum
+
+
+# Hacker Rank
+def solve_problem2_v3(uplimit: int):
+    fsum, fel1, fel2 = 0, 0, 2
+    while fel2 < uplimit:
+        fsum, fel1, fel2 = fsum + fel2, fel2, 4 * fel2 + fel1
+    return fsum
 
 
 if __name__ == "__main__":
     print(solve_problem2())
     print(solve_problem2_v2())
+    print(solve_problem2_v3())
